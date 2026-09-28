@@ -7,6 +7,22 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql+psycopg://recall:ci-only@127.0.0.1:5432/recall
+    services:
+      db:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: recall
+          POSTGRES_PASSWORD: ci-only
+          POSTGRES_DB: recall
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U recall -d recall"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -14,6 +30,14 @@ jobs:
           enable-cache: true
       - name: Install dependencies
         run: uv sync --locked --dev
+      - name: Verify database migration
+        run: |
+          uv run --locked alembic upgrade head
+          uv run --locked alembic check
+          uv run --locked python -c "from sqlalchemy import inspect; from recall_api.db.session import get_engine; assert 'users' in inspect(get_engine()).get_table_names()"
+          uv run --locked alembic downgrade base
+          uv run --locked alembic upgrade head
+          uv run --locked alembic check
       - name: Run tests
         run: uv run --locked pytest
       - name: Check style
