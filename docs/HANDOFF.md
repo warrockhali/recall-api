@@ -2,7 +2,7 @@
 
 ## Current Issue
 
-GitHub Issue #2 — 기본 테스트·Ruff·CI와 인수인계 문서 준비.
+없음. GitHub Issue #2(기본 테스트·Ruff·CI와 인수인계 문서 준비) 완료.
 
 ## Branch
 
@@ -18,7 +18,7 @@ GitHub Issue #2 — 기본 테스트·Ruff·CI와 인수인계 문서 준비.
 
 - 2026-09-28: `/health` 테스트 1개 통과. `uv run --locked pytest -q`는 이 PC의 애플리케이션 제어 정책이 `.venv/Scripts/python.exe`를 차단해 실행되지 않았다. uv가 설치한 Python 3.13과 동일한 `.venv` 패키지로 직접 실행해 확인했다.
 - 2026-09-28: `uv run --locked ruff check .`, `uv run --locked ruff format --check .`, `uv lock --check` 통과.
-- GitHub Actions 결과는 첫 push 후 확인한다.
+- 2026-09-28: [GitHub Actions CI 실행](https://github.com/warrockhali/recall-api/actions/runs/36383145718) 통과. 의존성 설치, 테스트, Ruff 검사와 형식 검사 모두 성공.
 
 ## Current Problem
 
@@ -27,7 +27,7 @@ GitHub Issue #2 — 기본 테스트·Ruff·CI와 인수인계 문서 준비.
 
 ## Next Step
 
-Issue #2의 검사를 완료한 뒤 Stage 1의 DB 연결과 첫 Alembic migration 작업을 시작한다.
+Stage 1의 DB 연결과 첫 Alembic migration 작업을 작은 Issue로 시작한다.
 
 ## Important Context
 
