@@ -2,11 +2,11 @@
 
 ## Current Issue
 
-GitHub Issue #5 — PR 검토·머지 규칙 문서화. PR #6의 사용자 검토를 기다린다. Issue #3의 DB PR #4는 머지되었다.
+GitHub Issue #7 — Issue 제목 형식 통일. Issue #3의 DB PR #4와 Issue #5의 PR 규칙 PR #6은 머지되었다.
 
 ## Branch
 
-`codex/5-pr-workflow` (검토 대상: `main`)
+`codex/7-issue-titles` (검토 대상: `main`)
 
 ## Completed
 
@@ -14,7 +14,8 @@ GitHub Issue #5 — PR 검토·머지 규칙 문서화. PR #6의 사용자 검�
 - 저장소의 개발 규칙을 `AGENTS.md`에 추가함(Issue #1).
 - `/health` 테스트, 개발 검사 명령, GitHub Actions 구성.
 - 동기 SQLAlchemy 연결, 요청별 Session 의존성, 첫 `users` 모델·migration, 로컬 PostgreSQL Compose 구성.
-- PR 규칙과 템플릿 변경을 PR #6에 제안함. 저장소의 허용 머지 방식은 Squash merge만으로 설정함.
+- PR #6에서 사용자 검토 후 Squash merge하는 규칙과 템플릿을 반영함. 저장소의 허용 머지 방식은 Squash merge만으로 설정함.
+- 기존 Issue 제목을 커밋·PR과 같은 `type(scope): 설명` 형식으로 정리함.
 
 ## Verification
 
@@ -25,6 +26,7 @@ GitHub Issue #5 — PR 검토·머지 규칙 문서화. PR #6의 사용자 검�
 - 2026-09-28: 변경 후 pytest 1개, Ruff 검사·형식 검사, lockfile·Compose 설정 검사 통과.
 - 2026-09-28: [GitHub Actions CI 실행](https://github.com/warrockhali/recall-api/actions/runs/36387359846) 통과. 새 PostgreSQL에서 migration 적용·스키마 비교·되돌리기·재적용과 테스트·Ruff 검사 모두 성공.
 - 2026-09-28: PR #4의 일반 머지를 동일한 파일 내용의 스쿼시 커밋으로 정리한 뒤 [main CI](https://github.com/warrockhali/recall-api/actions/runs/36389041526) 통과. 원래 머지 커밋은 `codex/backup-main-before-squash-pr4`에 보관함.
+- 2026-09-28: [PR #6 CI](https://github.com/warrockhali/recall-api/actions/runs/36389229308) 통과 후 사용자에 의해 Squash merge됨.
 
 ## Current Problem
 
@@ -34,7 +36,7 @@ GitHub Issue #5 — PR 검토·머지 규칙 문서화. PR #6의 사용자 검�
 
 ## Next Step
 
-PR #6을 검토하고 사용자가 승인하면 Squash merge한다. 이후 인증 기능을 작은 Issue로 시작한다. 이메일 정규화와 비밀번호 해시 방식을 먼저 정하고, 사용자별 데이터 접근 제한을 검증한다.
+Issue #7의 PR을 검토하고 사용자가 승인하면 Squash merge한다. 이후 인증 기능을 작은 Issue로 시작한다. 이메일 정규화와 비밀번호 해시 방식을 먼저 정하고, 사용자별 데이터 접근 제한을 검증한다.
 
 ## Important Context
 
