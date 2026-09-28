@@ -2,7 +2,7 @@
 
 ## Current Issue
 
-GitHub Issue #9 — 회원가입·로그인과 현재 사용자 확인. 이전 Issue #7의 PR #8은 머지되었다.
+GitHub Issue #9 — 회원가입·로그인과 현재 사용자 확인. PR #10은 사용자 검토 대기 중이다. 이전 Issue #7의 PR #8은 머지되었다.
 
 ## Branch
 
@@ -17,7 +17,7 @@ GitHub Issue #9 — 회원가입·로그인과 현재 사용자 확인. 이전 I
 ## Verification
 
 - 2026-09-29: `uv run --locked ... pytest tests/test_health.py -q` 1개 통과. Ruff 검사와 형식 검사 통과.
-- 인증 통합 테스트는 새 PostgreSQL에서 실행하는 GitHub Actions CI 결과를 확인해야 한다. 이 PC에는 현재 Docker 엔진이 연결되어 있지 않다.
+- 2026-09-29: [PR #10 CI](https://github.com/warrockhali/recall-api/actions/runs/36441135156) 통과. 새 PostgreSQL에서 migration 적용·스키마 비교·되돌리기·재적용, pytest 4개, Ruff 검사·형식 검사가 성공했다. 이 PC에는 현재 Docker 엔진이 연결되어 있지 않아 인증 통합 테스트는 로컬에서 실행하지 못했다.
 
 ## Current Problem
 
