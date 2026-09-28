@@ -2,7 +2,7 @@
 
 ## Current Issue
 
-GitHub Issue #3 — PostgreSQL 연결과 첫 `users` migration.
+없음. GitHub Issue #3(PostgreSQL 연결과 첫 `users` migration) 완료.
 
 ## Branch
 
@@ -21,7 +21,8 @@ GitHub Issue #3 — PostgreSQL 연결과 첫 `users` migration.
 - 2026-09-28: `uv run --locked ruff check .`, `uv run --locked ruff format --check .`, `uv lock --check` 통과.
 - 2026-09-28: [GitHub Actions CI 실행](https://github.com/warrockhali/recall-api/actions/runs/36383145718) 통과. 의존성 설치, 테스트, Ruff 검사와 형식 검사 모두 성공.
 - 2026-09-28: 로컬 PostgreSQL에서 `users` migration 적용 및 모델·스키마 비교 통과. 별도 빈 DB에서 적용 → 되돌리기 → 재적용을 검증했고, 세션의 UTC 설정과 데이터 쓰기·조회 후 rollback을 확인했다. 검증용 DB는 삭제했다.
-- 2026-09-28: 변경 후 pytest 1개, Ruff 검사·형식 검사, lockfile·Compose 설정 검사 통과. GitHub Actions 결과는 push 후 확인한다.
+- 2026-09-28: 변경 후 pytest 1개, Ruff 검사·형식 검사, lockfile·Compose 설정 검사 통과.
+- 2026-09-28: [GitHub Actions CI 실행](https://github.com/warrockhali/recall-api/actions/runs/36387359846) 통과. 새 PostgreSQL에서 migration 적용·스키마 비교·되돌리기·재적용과 테스트·Ruff 검사 모두 성공.
 
 ## Current Problem
 
@@ -31,7 +32,7 @@ GitHub Issue #3 — PostgreSQL 연결과 첫 `users` migration.
 
 ## Next Step
 
-Issue #3의 GitHub Actions 결과를 확인하고, 이후 인증 기능을 작은 Issue로 시작한다.
+인증 기능을 작은 Issue로 시작한다. 이메일 정규화와 비밀번호 해시 방식을 먼저 정하고, 사용자별 데이터 접근 제한을 검증한다.
 
 ## Important Context
 
