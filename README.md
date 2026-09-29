@@ -7,7 +7,8 @@
 - FastAPI 초기 구성
 - 상태 확인 API: GET /health
 - 자동 API 문서: /docs
-- PostgreSQL 연결 및 첫 `users` 테이블 migration (인증 API는 아직 없음)
+- PostgreSQL 연결 및 첫 `users` 테이블 migration
+- 회원가입, 로그인, 현재 사용자 확인 API
 
 ## 개발 환경
 
@@ -43,6 +44,16 @@ uv run --locked alembic current
 첫 migration은 계정의 이메일, 비밀번호 해시, 시간대와 생성 시각을 저장하는 `users` 테이블을 만듭니다. 실제 비밀번호나 노트 내용은 저장소에 넣지 마세요. `GET /health`는 DB 상태를 검사하는 API가 아닙니다.
 
 DB를 중지할 때는 `docker compose down`을 사용합니다. 볼륨은 유지되므로 데이터는 남습니다. 되돌리기를 검증할 때는 **개발용 빈 DB에서만** `uv run --locked alembic downgrade base`를 실행하세요. 이 명령은 `users` 테이블을 삭제합니다. 이후 `upgrade head`로 다시 생성할 수 있습니다.
+
+## 인증 API
+
+`.env`의 `AUTH_SECRET_KEY`에 무작위로 생성한 최소 32바이트의 비밀 문자열을 설정합니다. 배포 환경에서는 secret 관리 기능으로 주입하고 저장소에 기록하지 않습니다. 이 값이 없으면 로그인과 인증 요청에서 설정 오류가 발생합니다.
+
+- `POST /auth/register`: JSON `{"email":"person@example.com","password":"8자 이상"}`으로 가입합니다. 이메일은 앞뒤 공백을 제거하고 소문자로 저장하며, 중복 이메일은 409입니다.
+- `POST /auth/login`: 같은 JSON으로 로그인해 30분 유효한 Bearer 토큰을 받습니다. 잘못된 이메일이나 비밀번호는 401입니다.
+- `GET /auth/me`: `Authorization: Bearer <토큰>`으로 현재 계정을 확인합니다. 토큰이 없거나 유효하지 않으면 401입니다.
+
+비밀번호는 Argon2로 해시해 저장합니다. 토큰에는 사용자 ID와 만료 시간만 들어가며 로그아웃·토큰 폐기는 아직 지원하지 않습니다. `/health`는 인증이나 DB 설정 없이 그대로 동작합니다.
 
 ## 검사 방법
 
